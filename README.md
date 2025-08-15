@@ -39,61 +39,67 @@ This project is a practical demonstration of core skills required for Help Desk,
 
 This guide provides a detailed walkthrough for replicating this project, with screenshots included at each key stage.
 
+---
+
 ### Phase 0: Building the Virtual Lab in Azure
 
-1.  **Create Resources:** In Azure, create a new Resource Group (`AD-Lab-RG`) and a Virtual Network (`AD-Lab-VNet`).
-2.  **Deploy Domain Controller:** Create a `Windows Server 2019` VM named `DC-01`. Place it in the `AD-Lab-VNet`. Ensure RDP port 3389 is open.
-3.  **Deploy Client Machine:** Create a second `Windows Server 2019` VM named `Client-01`. Place it in the same `AD-Lab-VNet`. Ensure RDP port 3389 is open.
+1. **Create Resources:** In Azure, create a new Resource Group (`AD-Lab-RG`) and a Virtual Network (`AD-Lab-VNet`).
+2. **Deploy Domain Controller:** Create a `Windows Server 2019` VM named `DC-01`. Place it in the `AD-Lab-VNet`. Ensure RDP port 3389 is open.
+3. **Deploy Client Machine:** Create a second `Windows Server 2019` VM named `Client-01`. Place it in the same `AD-Lab-VNet`. Ensure RDP port 3389 is open.
 
-    *A screenshot of the Azure portal showing both VMs in the `AD-Lab-RG` resource group.*
-    `![Azure VMs](images/AD-Lab%20Resoruce%20Group.png)`
+![Azure VMs](https://github.com/Drayway/-Active-Directory-Group-Policy-Management-Lab/blob/main/images/AD-Lab%20Resource%20Group.png?raw=true)
+
+---
 
 ### Phase 1: Creating the Domain
 
-1.  **Connect to DC-01:** Log in to the `DC-01` server via RDP.
-2.  **Install AD DS Role:** Using Server Manager, add the "Active Directory Domain Services" role.
-3.  **Promote to Domain Controller:** After installation, run the promotion wizard. Select "Add a new forest" and create a root domain (e.g., `draytontech.local`). Complete the wizard and allow the server to restart.
+1. **Connect to DC-01:** Log in to the `DC-01` server via RDP.
+2. **Install AD DS Role:** Using Server Manager, add the "Active Directory Domain Services" role.
+3. **Promote to Domain Controller:** After installation, run the promotion wizard. Select "Add a new forest" and create a root domain (e.g., `draytontech.local`). Complete the wizard and allow the server to restart.
 
-    *A screenshot of the successful promotion to a Domain Controller.*
-    `![Promotion Success](images/Forest%20draytontech.png)`
+![Promotion Success](https://github.com/Drayway/-Active-Directory-Group-Policy-Management-Lab/blob/main/images/Forest%20draytontech.png?raw=true)
+
+---
 
 ### Phase 2: Structuring the Company in AD
 
-1.  **Connect to DC-01:** Log in with the new domain administrator credentials (e.g., `draytontech\labadmin`).
-2.  **Open ADUC:** Launch "Active Directory Users and Computers."
-3.  **Create OUs, Users & Groups:** Create two OUs (`Sales`, `Marketing`), a user `jsmith` in Sales, a user `jdoe` in Marketing, and a security group `Sales-Users` containing `jsmith`.
+1. **Connect to DC-01:** Log in with the new domain administrator credentials (e.g., `draytontech\labadmin`).
+2. **Open ADUC:** Launch "Active Directory Users and Computers."
+3. **Create OUs, Users & Groups:** Create two OUs (`Sales`, `Marketing`), a user `jsmith` in Sales, a user `jdoe` in Marketing, and a security group `Sales-Users` containing `jsmith`.
 
-    *A screenshot of the `jsmith` user object in Active Directory Users and Computers.*
-    `![ADUC Structure](images/User%20John%20Smith.png)`
+![ADUC Structure](https://github.com/Drayway/-Active-Directory-Group-Policy-Management-Lab/blob/main/images/User%20John%20Smith.png?raw=true)
+
+---
 
 ### Phase 3: Joining the Client to the Domain
 
-1.  **Connect to Client-01:** Log in to the `Client-01` machine with its local administrator account.
-2.  **Configure DNS:** Change the client's IPv4 settings to use the **Private IP address** of `DC-01` as its only DNS server.
-3.  **Join Domain:** Open System Properties (`sysdm.cpl`), and on the "Computer Name" tab, change the membership from "Workgroup" to your domain (`draytontech.local`). Provide domain admin credentials when prompted. The machine will restart.
+1. **Connect to Client-01:** Log in to the `Client-01` machine with its local administrator account.
+2. **Configure DNS:** Change the client's IPv4 settings to use the **Private IP address** of `DC-01` as its only DNS server.
+3. **Join Domain:** Open System Properties (`sysdm.cpl`), and on the "Computer Name" tab, change the membership from "Workgroup" to your domain (`draytontech.local`). Provide domain admin credentials when prompted. The machine will restart.
 
-    *A screenshot of the "Welcome to the draytontech.local domain" message.*
-    `![Domain Join Success](images/Welcome%20to%20draytontech.png)`
+![Domain Join Success](https://github.com/Drayway/-Active-Directory-Group-Policy-Management-Lab/blob/main/images/Welcome%20to%20draytontech.png?raw=true)
+
+---
 
 ### Phase 4: Enforcing Rules with Group Policy
 
-1.  **Connect to DC-01** and open **Group Policy Management**.
-2.  **Create GPOs:** Create and link the following three GPOs:
-    * `Standard Company Wallpaper` (linked to the domain)
-    * `Sales Network Drive` (linked to the `Sales` OU)
-    * `User Restrictions` (linked to the domain)
+1. **Connect to DC-01** and open **Group Policy Management**.
+2. **Create GPOs:** Create and link the following three GPOs:
+   * `Standard Company Wallpaper` (linked to the domain)
+   * `Sales Network Drive` (linked to the `Sales` OU)
+   * `User Restrictions` (linked to the domain)
 
-    *A screenshot of the Group Policy Management console showing the three GPOs linked correctly.*
-    `![GPO Management](images/Rules%20with%20Group%20Policy.png)`
+![GPO Management](https://github.com/Drayway/-Active-Directory-Group-Policy-Management-Lab/blob/main/images/Rules%20with%20Group%20Policy.png?raw=true)
 
-3.  **Edit Policies:** Configure each GPO to enforce the desired settings (desktop wallpaper, drive map, and Control Panel restriction).
+3. **Edit Policies:** Configure each GPO to enforce the desired settings (desktop wallpaper, drive map, and Control Panel restriction).
+
+---
 
 ### Phase 5: Verification
 
-1.  **Log in to Client-01** as `draytontech\jsmith`.
-2.  **Verify:** Check for the company wallpaper, the mapped `S:` drive, and the restriction on accessing the Control Panel.
+1. **Log in to Client-01** as `draytontech\jsmith`.
+2. **Verify:** Check for the company wallpaper, the mapped `S:` drive, and the restriction on accessing the Control Panel.
 
-    *A screenshot of the Client-01 desktop logged in as `jsmith`, showing the custom wallpaper and the mapped S: drive in File Explorer.*
-    `![Client Verification](images/Screenshot%202025-08-15%20101828.png)`
+![Client Verification](https://github.com/Drayway/-Active-Directory-Group-Policy-Management-Lab/blob/main/images/Screenshot%202025-08-15%20101828.png?raw=true)
 
-3.  **Log out** and log in as `draytontech\jdoe` to confirm that the `S:` drive is not mapped, but the other policies apply.
+3. **Log out** and log in as `draytontech\jdoe` to confirm that the `S:` drive is not mapped, but the other policies apply.
