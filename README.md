@@ -47,7 +47,7 @@ This guide provides a detailed walkthrough for replicating this project, with sc
 2. **Deploy Domain Controller:** Create a `Windows Server 2019` VM named `DC-01`. Place it in the `AD-Lab-VNet`. Ensure RDP port 3389 is open.
 3. **Deploy Client Machine:** Create a second `Windows Server 2019` VM named `Client-01`. Place it in the same `AD-Lab-VNet`. Ensure RDP port 3389 is open.
 
-![Azure VMs](https://github.com/Drayway/-Active-Directory-Group-Policy-Management-Lab/blob/main/images/AD-Lab%20Resource%20Group.png?raw=true)
+![Azure VMs](https://github.com/Drayway/-Active-Directory-Group-Policy-Management-Lab/blob/main/images/AD-Lab%20Resoruce%20Group.png?raw=true)
 
 ---
 
@@ -85,9 +85,9 @@ This guide provides a detailed walkthrough for replicating this project, with sc
 
 1. **Connect to DC-01** and open **Group Policy Management**.
 2. **Create GPOs:** Create and link the following three GPOs:
-   * `Standard Company Wallpaper` (linked to the domain)
-   * `Sales Network Drive` (linked to the `Sales` OU)
-   * `User Restrictions` (linked to the domain)
+    * `Standard Company Wallpaper` (linked to the domain)
+    * `Sales Network Drive` (linked to the `Sales` OU)
+    * `User Restrictions` (linked to the domain)
 
 ![GPO Management](https://github.com/Drayway/-Active-Directory-Group-Policy-Management-Lab/blob/main/images/Rules%20with%20Group%20Policy.png?raw=true)
 
