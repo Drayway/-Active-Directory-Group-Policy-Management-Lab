@@ -46,7 +46,7 @@ This guide provides a detailed walkthrough for replicating this project, with sc
 3.  **Deploy Client Machine:** Create a second `Windows Server 2019` VM named `Client-01`. Place it in the same `AD-Lab-VNet`. Ensure RDP port 3389 is open.
 
     *A screenshot of the Azure portal showing both VMs in the `AD-Lab-RG` resource group.*
-    `![Azure VMs](images/01-azure-vms.png)`
+    `![Azure VMs](images/AD-Lab%20Resoruce%20Group.png)`
 
 ### Phase 1: Creating the Domain
 
@@ -55,7 +55,7 @@ This guide provides a detailed walkthrough for replicating this project, with sc
 3.  **Promote to Domain Controller:** After installation, run the promotion wizard. Select "Add a new forest" and create a root domain (e.g., `draytontech.local`). Complete the wizard and allow the server to restart.
 
     *A screenshot of the successful promotion to a Domain Controller.*
-    `![Promotion Success](images/02-promotion-success.png)`
+    `![Promotion Success](images/Forest%20draytontech.png)`
 
 ### Phase 2: Structuring the Company in AD
 
@@ -64,7 +64,7 @@ This guide provides a detailed walkthrough for replicating this project, with sc
 3.  **Create OUs, Users & Groups:** Create two OUs (`Sales`, `Marketing`), a user `jsmith` in Sales, a user `jdoe` in Marketing, and a security group `Sales-Users` containing `jsmith`.
 
     *A screenshot of the final structure in Active Directory Users and Computers.*
-    `![ADUC Structure](images/03-aduc-structure.png)`
+    `![ADUC Structure](images/ad-structure.png)`
 
 ### Phase 3: Joining the Client to the Domain
 
@@ -73,7 +73,7 @@ This guide provides a detailed walkthrough for replicating this project, with sc
 3.  **Join Domain:** Open System Properties (`sysdm.cpl`), and on the "Computer Name" tab, change the membership from "Workgroup" to your domain (`draytontech.local`). Provide domain admin credentials when prompted. The machine will restart.
 
     *A screenshot of the "Welcome to the draytontech.local domain" message.*
-    `![Domain Join Success](images/04-domain-join-success.png)`
+    `![Domain Join Success](images/Welcome%20to%20draytontech.png)`
 
 ### Phase 4: Enforcing Rules with Group Policy
 
@@ -84,7 +84,7 @@ This guide provides a detailed walkthrough for replicating this project, with sc
     * `User Restrictions` (linked to the domain)
 
     *A screenshot of the Group Policy Management console showing the three GPOs linked correctly.*
-    `![GPO Management](images/05-gpo-management.png)`
+    `![GPO Management](images/Rules%20with%20Group%20Policy.png)`
 
 3.  **Edit Policies:** Configure each GPO to enforce the desired settings (desktop wallpaper, drive map, and Control Panel restriction).
 
@@ -94,6 +94,6 @@ This guide provides a detailed walkthrough for replicating this project, with sc
 2.  **Verify:** Check for the company wallpaper, the mapped `S:` drive, and the restriction on accessing the Control Panel.
 
     *A screenshot of the Client-01 desktop logged in as `jsmith`, showing the custom wallpaper and the mapped S: drive in File Explorer.*
-    `![Client Verification](images/06-client-verification.png)`
+    `![Client Verification](images/Screenshot%202025-08-15%20101828.png)`
 
 3.  **Log out** and log in as `draytontech\jdoe` to confirm that the `S:` drive is not mapped, but the other policies apply.
