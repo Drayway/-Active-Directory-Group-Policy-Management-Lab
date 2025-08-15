@@ -46,7 +46,7 @@ This guide provides a detailed walkthrough for replicating this project, with sc
 3.  **Deploy Client Machine:** Create a second `Windows Server 2019` VM named `Client-01`. Place it in the same `AD-Lab-VNet`. Ensure RDP port 3389 is open.
 
     *A screenshot of the Azure portal showing both VMs in the `AD-Lab-RG` resource group.*
-    `![Azure VMs](images/AD-Lab%20Resoruce%20Group.png)`
+    `![Azure VMs](AD-Lab%20Resource%20Group.png)
 
 ### Phase 1: Creating the Domain
 
