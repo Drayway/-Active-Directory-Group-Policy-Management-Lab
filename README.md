@@ -46,7 +46,7 @@ This guide provides a detailed walkthrough for replicating this project, with sc
 3.  **Deploy Client Machine:** Create a second `Windows Server 2019` VM named `Client-01`. Place it in the same `AD-Lab-VNet`. Ensure RDP port 3389 is open.
 
     *A screenshot of the Azure portal showing both VMs in the `AD-Lab-RG` resource group.*
-    `![Azure VMs](AD-Lab%20Resource%20Group.png)
+    `![Azure VMs](images/AD-Lab%20Resoruce%20Group.png)`
 
 ### Phase 1: Creating the Domain
 
@@ -63,8 +63,8 @@ This guide provides a detailed walkthrough for replicating this project, with sc
 2.  **Open ADUC:** Launch "Active Directory Users and Computers."
 3.  **Create OUs, Users & Groups:** Create two OUs (`Sales`, `Marketing`), a user `jsmith` in Sales, a user `jdoe` in Marketing, and a security group `Sales-Users` containing `jsmith`.
 
-    *A screenshot of the final structure in Active Directory Users and Computers.*
-    `![ADUC Structure](images/ad-structure.png)`
+    *A screenshot of the `jsmith` user object in Active Directory Users and Computers.*
+    `![ADUC Structure](images/User%20John%20Smith.png)`
 
 ### Phase 3: Joining the Client to the Domain
 
